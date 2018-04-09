@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+    <link rel="shortcut icon" type="image/x-icon" href="icon.png"/>
+    <title>Kaffeeladen</title>
+</h:head>
+<h:body>
+    <h1>Business</h1>
+    <h2>Rechnungen</h2>
+    <h:form>
+        <p:dataTable id="billList" var="bill" value="#{mainController.bills}" selectionMode="single" selection="#{mainController.selectedBill}"
+                     rowKey="#{bill.id}">
+            <p:ajax event="rowSelect" update="selectedBill"/>
+            <p:column headerText="Id">
+                <h:outputText value="#{bill.id}"/>
+            </p:column>
+
+            <p:column headerText="Coffee-Table Nr.">
+                <h:outputText value="#{bill.coffeeTable.coffeeTableNr}"/>
+            </p:column>
+
+            <p:column headerText="Bill Nr.">
+                <h:outputText value="#{bill.billNumber}"/>
+            </p:column>
+
+            <p:column headerText="Kosten">
+                <h:outputText value="#{bill.costs}"/>
+            </p:column>
+        </p:dataTable>
+    </h:form>
+    <h:form id="selectedBill">
+        <c:if test="#{mainController.selectedBill!=null}">
+            <h4>Ausgewählte Rechnung</h4>
+            <h:outputText value="Rechnungsnummer: #{mainController.selectedBill.billNumber}"/>
+            <h5>Produkte auf der Rechnung</h5>
+            <p:dataTable var="purchasedProduct" value="#{mainController.selectedBill.purchasedProducts}">
+                <p:column headerText="Produktname">
+                    <h:outputText value="#{purchasedProduct.product.name}"/>
+                </p:column>
+
+                <p:column headerText="Produktmenge">
+                    <h:outputText value="#{purchasedProduct.amount}"/>
+                </p:column>
+
+                <p:column headerText="Kosten">
+                    <h:outputText value="#{purchasedProduct.amount * purchasedProduct.product.price}"/>
+                </p:column>
+            </p:dataTable>
+
+            <h6>Produkt zur Rechnung hinzufügen</h6>
+            <h:form>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <p:outputLabel for="purchasedProductProduct" value="Gekauftes Produkt: "/>
+                    <p:selectOneMenu id="purchasedProductProduct" value="#{mainController.newProductId}">
+                        <c:forEach items="#{mainController.products}" var="product">
+                            <f:selectItem itemLabel="#{product.name} - #{product.id}" itemValue="#{product.id}"/>
+                        </c:forEach>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="purchasedProductAmount" value="Anzahl:"/>
+                    <p:inputNumber id="purchasedProductAmount" value="#{mainController.newPurchasedProduct.amount}"/>
+
+                    <p:commandButton value="Reset" type="reset"/>
+                    <p:commandButton value="Add" action="#{mainController.createNewPurchasedProduct}"/>
+                </h:panelGrid>
+            </h:form>
+            <p:commandButton value="Add" action="#{mainController.createNewPurchasedProduct}"/>
+
+        </c:if>
+    </h:form>
+    <p:commandButton value="Add" action="#{mainController.createNewPurchasedProduct}"/>
+    <h4>Rechnung hinzufügen</h4>
+    <h:form>
+        <h:panelGrid columns="2" cellpadding="5">
+            <p:outputLabel for="billNr" value="Rechnungsnummer: "/>
+            <p:inputText id="billNr" value="#{mainController.newBill.billNumber}"/>
+
+            <p:outputLabel for="waiterSalary" value="Coffee Table:"/>
+            <p:selectOneMenu id="waiterSalary" value="#{mainController.newCoffeeTableId}">
+                <c:forEach items="#{mainController.coffeeTables}" var="coffeeTable">
+                    <f:selectItem itemLabel="#{coffeeTable.coffeeTableNr} - #{coffeeTable.id}" itemValue="#{coffeeTable.id}"/>
+                </c:forEach>
+            </p:selectOneMenu>
+
+            <p:commandButton value="Reset" type="reset"/>
+            <p:commandButton value="Add" action="#{mainController.createNewBill}">
+            </p:commandButton>
+        </h:panelGrid>
+    </h:form>
+    <hr/>
+    <p:button outcome="/faces/management.xhtml" value="Switch to Management View" type="button" icon="fa far fa-money-bill-alt">
+
+    </p:button>
+</h:body>
+</html>

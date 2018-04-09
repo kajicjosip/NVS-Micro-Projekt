@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="Derby (Remote) - db@localhost">
+  <database-model serializer="dbm" rdbms="DERBY" format-version="4.7">
+    <root id="1"/>
+    <schema id="2" parent="1" name="APP">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="NULLID"/>
+    <schema id="4" parent="1" name="SQLJ"/>
+    <schema id="5" parent="1" name="SYS"/>
+    <schema id="6" parent="1" name="SYSCAT"/>
+    <schema id="7" parent="1" name="SYSCS_DIAG"/>
+    <schema id="8" parent="1" name="SYSCS_UTIL"/>
+    <schema id="9" parent="1" name="SYSFUN"/>
+    <schema id="10" parent="1" name="SYSIBM"/>
+    <schema id="11" parent="1" name="SYSPROC"/>
+    <schema id="12" parent="1" name="SYSSTAT"/>
+    <table id="13" parent="2" name="KL_BILL"/>
+    <table id="14" parent="2" name="KL_COFFEE_TABLE"/>
+    <table id="15" parent="2" name="KL_COFFEE_TABLE_KL_BILL"/>
+    <table id="16" parent="2" name="KL_PRODUCT"/>
+    <table id="17" parent="2" name="KL_PRODUCT_KL_PURCHASED_PRODUCT"/>
+    <table id="18" parent="2" name="KL_PURCHASED_PRODUCT"/>
+    <table id="19" parent="2" name="KL_WAITER"/>
+    <column id="20" parent="13" name="B_ID">
+      <Position>1</Position>
+      <DataType>INTEGER(10)|4</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DefaultExpression>GENERATED_BY_DEFAULT</DefaultExpression>
+    </column>
+    <column id="21" parent="13" name="B_NUMBER">
+      <Position>2</Position>
+      <DataType>VARCHAR(255)|12</DataType>
+    </column>
+    <column id="22" parent="13" name="COFFEETABLE_CT_ID">
+      <Position>3</Position>
+      <DataType>INTEGER(10)|4</DataType>
+    </column>
+    <key id="23" parent="13" name="SQL180408210119130">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>B_ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="24" parent="13" name="FK2MQ8I0JYJFNNHBPNQAXBYQ4SU">
+      <ColNames>COFFEETABLE_CT_ID</ColNames>
+      <RefSchemaName>APP</RefSchemaName>
+      <RefTableName>KL_COFFEE_TABLE</RefTableName>
+      <RefKeyName>SQL180408210119160</RefKeyName>
+      <RefColNames>CT_ID</RefColNames>
+    </foreign-key>
+    <column id="25" parent="14" name="CT_ID">
+      <Position>1</Position>
+      <DataType>INTEGER(10)|4</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DefaultExpression>GENERATED_BY_DEFAULT</DefaultExpression>
+    </column>
+    <column id="26" parent="14" name="CT_COFFEE_TABLE_NR">
+      <Position>2</Position>
+      <DataType>INTEGER(10)|4</DataType>
+    </column>
+    <column id="27" parent="14" name="W_ID">
+      <Position>3</Position>
+      <DataType>INTEGER(10)|4</DataType>
+    </column>
+    <key id="28" parent="14" name="SQL180408210119160">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>CT_ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="29" parent="14" name="FKDF0G6HYR5HD00ACL0BP32JS5N">
+      <ColNames>W_ID</ColNames>
+      <RefSchemaName>APP</RefSchemaName>
+      <RefTableName>KL_WAITER</RefTableName>
+      <RefKeyName>SQL180408210119270</RefKeyName>
+      <RefColNames>W_ID</RefColNames>
+    </foreign-key>
+    <column id="30" parent="15" name="COFFEETABLE_CT_ID">
+      <Position>1</Position>
+      <DataType>INTEGER(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="31" parent="15" name="BILLSOFTABLE_B_ID">
+      <Position>2</Position>
+      <DataType>INTEGER(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <foreign-key id="32" parent="15" name="FK8661RNUHBOHXFPB0GL7JN28MX">
+      <ColNames>COFFEETABLE_CT_ID</ColNames>
+      <RefSchemaName>APP</RefSchemaName>
+      <RefTableName>KL_COFFEE_TABLE</RefTableName>
+      <RefKeyName>SQL180408210119160</RefKeyName>
+      <RefColNames>CT_ID</RefColNames>
+    </foreign-key>
+    <foreign-key id="33" parent="15" name="FKHT61EORT21SI6BUME9BCJI5L">
+      <ColNames>BILLSOFTABLE_B_ID</ColNames>
+      <RefSchemaName>APP</RefSchemaName>
+      <RefTableName>KL_BILL</RefTableName>
+      <RefKeyName>SQL180408210119130</RefKeyName>
+      <RefColNames>B_ID</RefColNames>
+    </foreign-key>
+    <column id="34" parent="16" name="P_ID">
+      <Position>1</Position>
+      <DataType>INTEGER(10)|4</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DefaultExpression>GENERATED_BY_DEFAULT</DefaultExpression>
+    </column>
+    <column id="35" parent="16" name="P_NAME">
+      <Position>2</Position>
+      <DataType>VARCHAR(255)|12</DataType>
+    </column>
+    <column id="36" parent="16" name="P_PRICE">
+      <Position>3</Position>
+      <DataType>DOUBLE(52)|8</DataType>
+    </column>
+    <key id="37" parent="16" name="SQL180408210119180">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>P_ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="38" parent="17" name="PRODUCT_P_ID">
+      <Position>1</Position>
+      <DataType>INTEGER(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="39" parent="17" name="PURCHASEDPRODUCTS_PP_ID">
+      <Position>2</Position>
+      <DataType>INTEGER(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <foreign-key id="40" parent="17" name="FKN5062WIVU6XWJ97KCJBQB3TMG">
+      <ColNames>PRODUCT_P_ID</ColNames>
+      <RefSchemaName>APP</RefSchemaName>
+      <RefTableName>KL_PRODUCT</RefTableName>
+      <RefKeyName>SQL180408210119180</RefKeyName>
+      <RefColNames>P_ID</RefColNames>
+    </foreign-key>
+    <foreign-key id="41" parent="17" name="FK1MKNS0HDKUBTDPLKCVLLOWP3X">
+      <ColNames>PURCHASEDPRODUCTS_PP_ID</ColNames>
+      <RefSchemaName>APP</RefSchemaName>
+      <RefTableName>KL_PURCHASED_PRODUCT</RefTableName>
+      <RefKeyName>SQL180408205941230</RefKeyName>
+      <RefColNames>PP_ID</RefColNames>
+    </foreign-key>
+    <column id="42" parent="18" name="PP_ID">
+      <Position>1</Position>
+      <DataType>INTEGER(10)|4</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DefaultExpression>GENERATED_BY_DEFAULT</DefaultExpression>
+    </column>
+    <column id="43" parent="18" name="PP_AMOUNT">
+      <Position>2</Position>
+      <DataType>INTEGER(10)|4</DataType>
+    </column>
+    <column id="44" parent="18" name="BILL_B_ID">
+      <Position>3</Position>
+      <DataType>INTEGER(10)|4</DataType>
+    </column>
+    <column id="45" parent="18" name="PRODUCT_P_ID">
+      <Position>4</Position>
+      <DataType>INTEGER(10)|4</DataType>
+    </column>
+    <key id="46" parent="18" name="SQL180408205941230">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>PP_ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="47" parent="18" name="FKQX34M6YJXRCY9GMG3MEOEQGWI">
+      <ColNames>BILL_B_ID</ColNames>
+      <RefSchemaName>APP</RefSchemaName>
+      <RefTableName>KL_BILL</RefTableName>
+      <RefKeyName>SQL180408210119130</RefKeyName>
+      <RefColNames>B_ID</RefColNames>
+    </foreign-key>
+    <foreign-key id="48" parent="18" name="FKCDGMQH80B4KYIEVQ2G0NP5F96">
+      <ColNames>PRODUCT_P_ID</ColNames>
+      <RefSchemaName>APP</RefSchemaName>
+      <RefTableName>KL_PRODUCT</RefTableName>
+      <RefKeyName>SQL180408210119180</RefKeyName>
+      <RefColNames>P_ID</RefColNames>
+    </foreign-key>
+    <column id="49" parent="19" name="W_ID">
+      <Position>1</Position>
+      <DataType>INTEGER(10)|4</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DefaultExpression>GENERATED_BY_DEFAULT</DefaultExpression>
+    </column>
+    <column id="50" parent="19" name="W_NAME">
+      <Position>2</Position>
+      <DataType>VARCHAR(255)|12</DataType>
+    </column>
+    <column id="51" parent="19" name="W_SALARY">
+      <Position>3</Position>
+      <DataType>DOUBLE(52)|8</DataType>
+    </column>
+    <key id="52" parent="19" name="SQL180408210119270">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>W_ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>

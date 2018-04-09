@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
+>
+<h:head>
+    <link rel="shortcut icon" type="image/x-icon" href="icon.png"/>
+    <title>Kaffeeladen</title>
+</h:head>
+<h:body>
+    <h1>Management</h1>
+
+    <h3>Momentan Verfügbare Tische</h3>
+    <p:dataTable id="coffeeTableList" var="coffeeTable" value="#{mainController.coffeeTables}">
+        <p:column headerText="Id">
+            <h:outputText value="#{coffeeTable.id}"/>
+        </p:column>
+
+        <p:column headerText="Coffee-Table Nr.">
+            <h:outputText value="#{coffeeTable.coffeeTableNr}"/>
+        </p:column>
+
+        <p:column headerText="Waiter">
+            <h:outputText value="#{coffeeTable.waiter.name}"/>
+        </p:column>
+    </p:dataTable>
+    <h4>Tische hinzufügen</h4>
+    <h:form>
+        <h:panelGrid columns="2" cellpadding="5">
+            <p:outputLabel for="coffeeTableNr" value="Coffee-Table Nr.: " />
+            <p:inputNumber id="coffeeTableNr" value="#{mainController.newCoffeeTable.coffeeTableNr}"/>
+
+            <p:outputLabel for="coffeeTableWaiter" value="Waiter:" />
+            <p:selectOneMenu id="coffeeTableWaiter" value="#{mainController.newWaiterId}">
+                <c:forEach items="#{mainController.waiterList}" var="waiter">
+                    <f:selectItem itemLabel="#{waiter.name} - #{waiter.id}" itemValue="#{waiter.id}"/>
+                </c:forEach>
+            </p:selectOneMenu>
+
+            <p:commandButton value="Reset" type="reset" />
+            <p:commandButton value="Add" action="#{mainController.createNewCoffeeTable}"></p:commandButton>
+        </h:panelGrid>
+    </h:form>
+
+    <h3>Momentan angestellte Kellner/innen</h3>
+    <p:dataTable id="waiterList" var="waiter" value="#{mainController.waiterList}" rowKey="#{waiter.id}">
+        <p:column headerText="Id">
+            <h:outputText value="#{waiter.id}"/>
+        </p:column>
+
+        <p:column headerText="Name">
+            <h:outputText value="#{waiter.name}"/>
+        </p:column>
+
+        <p:column headerText="Salary">
+            <h:outputText value="#{waiter.salary}"/>
+        </p:column>
+    </p:dataTable>
+    <h4>Kellner/in anstellen</h4>
+    <h:form>
+        <h:panelGrid columns="2" cellpadding="5">
+            <p:outputLabel for="waiterName" value="Name: " />
+            <p:inputText id="waiterName" value="#{mainController.newWaiter.name}"/>
+
+            <p:outputLabel for="waiterSalary" value="Salary:" />
+            <p:inputNumber id="waiterSalary" value="#{mainController.newWaiter.salary}"/>
+
+            <p:commandButton value="Reset" type="reset" />
+            <p:commandButton value="Hire" action="#{mainController.createNewWaiter}">
+            </p:commandButton>
+        </h:panelGrid>
+    </h:form>
+
+    <h3>Momentan verfügbare Produkte</h3>
+    <p:dataTable id="productList" var="product" value="#{mainController.products}" rowKey="#{product.id}">
+        <p:column headerText="Id">
+            <h:outputText value="#{product.id}"/>
+        </p:column>
+
+        <p:column headerText="Name">
+            <h:outputText value="#{product.name}"/>
+        </p:column>
+
+        <p:column headerText="Price">
+            <h:outputText value="#{product.price}"/>
+        </p:column>
+    </p:dataTable>
+
+    <h4>Produkt hinzufügen</h4>
+    <h:form>
+        <h:panelGrid columns="2" cellpadding="5">
+            <p:outputLabel for="productName" value="Name: " />
+            <p:inputText id="productName" value="#{mainController.newProduct.name}"/>
+
+            <p:outputLabel for="productPrice" value="Price:" />
+            <p:inputNumber id="productPrice" value="#{mainController.newProduct.price}"/>
+
+            <p:commandButton value="Reset" type="reset" />
+            <p:commandButton value="Add" action="#{mainController.createNewProduct}"/>
+        </h:panelGrid>
+    </h:form>
+
+
+    <hr/>
+    <p:button outcome="/faces/business.xhtml" value="Switch to Business View" type="button" icon="fa far fa-money-bill-alt"></p:button>
+</h:body>
+</html>
